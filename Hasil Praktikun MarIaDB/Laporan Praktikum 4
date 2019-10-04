@@ -1,0 +1,417 @@
+Enter password: ***********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.2.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use satria;
+ERROR 1049 (42000): Unknown database 'satria'
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 18650105haffad     |
+| aziz_maulana       |
+| budi               |
+| ilhamrafd          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| praktikum5         |
+| rizkiutama         |
++--------------------+
+9 rows in set (0.00 sec)
+
+MariaDB [(none)]> use budi;
+Database changed
+MariaDB [budi]> create table Mahasiswa (nim int not null, nama_mhs varchar(20), alamat_mhs varchar(20), id_fak int not null, primary key(nim));
+ERROR 1050 (42S01): Table 'mahasiswa' already exists
+MariaDB [budi]> create table Mahasiswa1 (nim int not null, nama_mhs varchar(20), alamat_mhs varchar(20), id_fak int not null, primary key(nim));
+Query OK, 0 rows affected (0.02 sec)
+
+MariaDB [budi]> create table fakultas(id_fak int not null,  nama_fak varchar(20), primary key(id_fak));
+ERROR 1050 (42S01): Table 'fakultas' already exists
+MariaDB [budi]> create table Fakultas1 (id_fak int not null,  nama_fak varchar(20), primary key(id_fak));
+Query OK, 0 rows affected (0.02 sec)
+
+MariaDB [budi]>  alter table Mahasiswa add constraint Fakultas1 foreign key (id_fak) references Fakultas1 (id_fak) on update no action on delete no action;
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`budi`.`#sql-1224_a`, CONSTRAINT `Fakultas1` FOREIGN KEY (`id_fak`) REFERENCES `fakultas1` (`id_fak`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+MariaDB [budi]> alter table Mahasiswa1 add constraint Fakultas1 foreign key (id_fak) references Fakultas1 (id_fak) on update no action on delete no action;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> alter table Mahasiswa add no_telp varchar(20);
+ERROR 1060 (42S21): Duplicate column name 'no_telp'
+MariaDB [budi]> alter table Mahasiswa1 add no_telp varchar(20);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> insert into Fakultas values (1, 'SAINTEK');
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+MariaDB [budi]> insert into Fakultas1 values (1, 'SAINTEK');
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [budi]> insert into Fakultas2 values (2, 'PSIKOLOGI');
+ERROR 1146 (42S02): Table 'budi.fakultas2' doesn't exist
+MariaDB [budi]>  insert into Fakultas1 values (2, 'PSIKOLOGI');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> insert into Mahasiswa1 values (1,'edi', 'solo', 1, '08878');
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [budi]>  insert into Mahasiswa1 values (2,'ediah', 'jogja', 2, '08879');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]>  insert into Mahasiswa1 values(3, 'edo', 'nganjuk', 1, '08880');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]>  insert into Mahasiswa1 values(4, 'edoati', 'jkt', 1, '08881');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]>  insert into Mahasiswa1 values (5, 'ita', 'sby', 2, '08882');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]>  insert into Mahasiswa1 values (6, 'ati', 'riau', 1, '08883');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]>  insert into Mahasiswa1 values(7, 'rio', 'malang', 2, '08884');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> select*from Mahasiswa1;
++-----+----------+------------+--------+---------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp |
++-----+----------+------------+--------+---------+
+|   1 | edi      | solo       |      1 | 08878   |
+|   2 | ediah    | jogja      |      2 | 08879   |
+|   3 | edo      | nganjuk    |      1 | 08880   |
+|   4 | edoati   | jkt        |      1 | 08881   |
+|   5 | ita      | sby        |      2 | 08882   |
+|   6 | ati      | riau       |      1 | 08883   |
+|   7 | rio      | malang     |      2 | 08884   |
++-----+----------+------------+--------+---------+
+7 rows in set (0.00 sec)
+
+MariaDB [budi]> alter table Mahasiswa1 add gender varchar(20);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> update Mahasiswa1 set gender ='L' where nim = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [budi]> update Mahasiswa1 set gender ='P' where nim = 2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [budi]> update Mahasiswa1 set gender ='L' where nim = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [budi]> update Mahasiswa1 set gender ='P' where nim = 4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [budi]> update Mahasiswa1 set gender ='P' where nim = 5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [budi]> update Mahasiswa1 set gender ='P' where nim = 6;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [budi]> update Mahasiswa1 set gender ='L' where nim = 7;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [budi]> select *from Mahasiswa1;
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   1 | edi      | solo       |      1 | 08878   | L      |
+|   2 | ediah    | jogja      |      2 | 08879   | P      |
+|   3 | edo      | nganjuk    |      1 | 08880   | L      |
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
+|   7 | rio      | malang     |      2 | 08884   | L      |
++-----+----------+------------+--------+---------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [budi]> select nim as nomoridentitas, nama_mhs as nama, alamat_mhs as alamat, id_fak as nama_fakultas from Mahasiswa1;
++----------------+--------+---------+---------------+
+| nomoridentitas | nama   | alamat  | nama_fakultas |
++----------------+--------+---------+---------------+
+|              1 | edi    | solo    |             1 |
+|              2 | ediah  | jogja   |             2 |
+|              3 | edo    | nganjuk |             1 |
+|              4 | edoati | jkt     |             1 |
+|              5 | ita    | sby     |             2 |
+|              6 | ati    | riau    |             1 |
+|              7 | rio    | malang  |             2 |
++----------------+--------+---------+---------------+
+7 rows in set (0.00 sec)
+
+MariaDB [budi]> select*from Mahasiswa1 where = 'P';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= 'P'' at line 1
+MariaDB [budi]> select * from Mahasiswa where gender = 'P';
+ERROR 1054 (42S22): Unknown column 'gender' in 'where clause'
+MariaDB [budi]> select*from Mahasiswa1;
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   1 | edi      | solo       |      1 | 08878   | L      |
+|   2 | ediah    | jogja      |      2 | 08879   | P      |
+|   3 | edo      | nganjuk    |      1 | 08880   | L      |
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
+|   7 | rio      | malang     |      2 | 08884   | L      |
++-----+----------+------------+--------+---------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where gender = 'P';
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   2 | ediah    | jogja      |      2 | 08879   | P      |
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
++-----+----------+------------+--------+---------+--------+
+4 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where id_fak = 1 and gender ='P';
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
++-----+----------+------------+--------+---------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where id_fak = 1 and gender = 'P';
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
++-----+----------+------------+--------+---------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where id_fak = 1 or gender = 'P';
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   1 | edi      | solo       |      1 | 08878   | L      |
+|   2 | ediah    | jogja      |      2 | 08879   | P      |
+|   3 | edo      | nganjuk    |      1 | 08880   | L      |
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
++-----+----------+------------+--------+---------+--------+
+6 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nim beetwen '3' and '5';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'beetwen '3' and '5'' at line 1
+MariaDB [budi]> select * from Mahasiswa1 where nim beetwen 3 and 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'beetwen 3 and 5' at line 1
+MariaDB [budi]> select * from Mahasiswa1 where nim between '3' and '5';
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   3 | edo      | nganjuk    |      1 | 08880   | L      |
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
++-----+----------+------------+--------+---------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nim in (3, 4, 5);
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   3 | edo      | nganjuk    |      1 | 08880   | L      |
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
++-----+----------+------------+--------+---------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [budi]>  select * from Mahasiswa1 where nim not in (3, 4, 5);
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   1 | edi      | solo       |      1 | 08878   | L      |
+|   2 | ediah    | jogja      |      2 | 08879   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
+|   7 | rio      | malang     |      2 | 08884   | L      |
++-----+----------+------------+--------+---------+--------+
+4 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nim in (2, 3, 5);
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   2 | ediah    | jogja      |      2 | 08879   | P      |
+|   3 | edo      | nganjuk    |      1 | 08880   | L      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
++-----+----------+------------+--------+---------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like '&I';
+Empty set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like '&i';
+Empty set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa like '&i';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like '&i'' at line 1
+MariaDB [budi]> select * from Mahasiswa1 loke '&i';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''&i'' at line 1
+MariaDB [budi]> select * from Mahasiswa1 like '&i';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like '&i'' at line 1
+MariaDB [budi]> select * from Mahasiswa1;
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   1 | edi      | solo       |      1 | 08878   | L      |
+|   2 | ediah    | jogja      |      2 | 08879   | P      |
+|   3 | edo      | nganjuk    |      1 | 08880   | L      |
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
+|   7 | rio      | malang     |      2 | 08884   | L      |
++-----+----------+------------+--------+---------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like 'I%';
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   5 | ita      | sby        |      2 | 08882   | P      |
++-----+----------+------------+--------+---------+--------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]>  insert into Mahasiswa1 values (8, 'santi', 'semarang', 2, '08890', 'P');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> selct*from Mahasiswa1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'selct*from Mahasiswa1' at line 1
+MariaDB [budi]> select * from Mahasiswa1;
++-----+----------+------------+--------+---------+--------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp | gender |
++-----+----------+------------+--------+---------+--------+
+|   1 | edi      | solo       |      1 | 08878   | L      |
+|   2 | ediah    | jogja      |      2 | 08879   | P      |
+|   3 | edo      | nganjuk    |      1 | 08880   | L      |
+|   4 | edoati   | jkt        |      1 | 08881   | P      |
+|   5 | ita      | sby        |      2 | 08882   | P      |
+|   6 | ati      | riau       |      1 | 08883   | P      |
+|   7 | rio      | malang     |      2 | 08884   | L      |
+|   8 | santi    | semarang   |      2 | 08890   | P      |
++-----+----------+------------+--------+---------+--------+
+8 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like '&D';
+Empty set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like '&a';
+Empty set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like '&A';
+Empty set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like '&0';
+Empty set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like '__n%a';
+Empty set (0.00 sec)
+
+MariaDB [budi]> select * from Mahasiswa1 where nama_mhs like '__n%a';
+Empty set (0.00 sec)
+
+MariaDB [budi]> select nim as nomoridentitas, nama_mhs as nama, alamat_mhs as alamat, id_fak as nama_fakultas, gender where nama_mhs like 'a%' and mahasiswa.id_fak=fakultas.id_fak;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where nama_mhs like 'a%' and mahasiswa.id_fak=fakultas.id_fak' at line 1
+MariaDB [budi]> select nim, nama_mhs, alamat_mhs, nama_fak, no_telp, gender from Mahasiswa1, Fakultas where nama_mhs like '%a' and nama_mhs like '__n%' and  Mahasiswa1.id_fak=Fakultas.id_fak;
+Empty set (0.00 sec)
+
+MariaDB [budi]> select distinct id_fak from fakultas;
++--------+
+| id_fak |
++--------+
+|      1 |
+|      2 |
++--------+
+2 rows in set (0.00 sec)
+
+MariaDB [budi]> select distinct id_fak from Fakultas;
++--------+
+| id_fak |
++--------+
+|      1 |
+|      2 |
++--------+
+2 rows in set (0.00 sec)
+
+MariaDB [budi]> select nim, nama_mhs, alamat_mhs, id_fak, no_telp, gender, nama_fak from mahasiswa1, fakultas limit 3;
+ERROR 1052 (23000): Column 'id_fak' in field list is ambiguous
+MariaDB [budi]> select nim, nama_mhs, alamat_mhs, no_telp, gender, nama_fak from mahasiswa1, fakultas limit 3;
++-----+----------+------------+---------+--------+-----------+
+| nim | nama_mhs | alamat_mhs | no_telp | gender | nama_fak  |
++-----+----------+------------+---------+--------+-----------+
+|   1 | edi      | solo       | 08878   | L      | SAINTEK   |
+|   1 | edi      | solo       | 08878   | L      | PSIKOLOGI |
+|   2 | ediah    | jogja      | 08879   | P      | SAINTEK   |
++-----+----------+------------+---------+--------+-----------+
+3 rows in set (0.00 sec)
+
+MariaDB [budi]>  create table Mahasiswa (nim int not null, nama varchar(20));
+ERROR 1050 (42S01): Table 'mahasiswa' already exists
+MariaDB [budi]> create table organdalam (nim int not null, nama varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+MariaDB [budi]> insert into organdalam values (1, "jantung");
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [budi]> insert into organdalam values (2, "paruparu");
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> insert into organdalam values (3, "tenggorokan");
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> create table organluar (nim int not null, nama varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+MariaDB [budi]> insert into organluar values (1, "hidung");
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [budi]> insert into organluar values (2, "mata");
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]>  insert into organluar values (3, "tenggorokan");
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> select * from organ_luar union select * from organ_dalam;
+ERROR 1146 (42S02): Table 'budi.organ_luar' doesn't exist
+MariaDB [budi]> select * from organluar union select * from organdalam;
++-----+-------------+
+| nim | nama        |
++-----+-------------+
+|   1 | hidung      |
+|   2 | mata        |
+|   3 | tenggorokan |
+|   1 | jantung     |
+|   2 | paruparu    |
++-----+-------------+
+5 rows in set (0.00 sec)
+
+MariaDB [budi]> select * from organluar except select * from organdalam;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from organdalam' at line 1
+MariaDB [budi]> select * from organ_luar interserct select * from organ_dalam;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from organ_dalam' at line 1
+MariaDB [budi]> select * from organ_luar interset select * from organ_dalam;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from organ_dalam' at line 1
+MariaDB [budi]> select * from organluar intersect select * from organdalam;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from organdalam' at line 1
+MariaDB [budi]>
