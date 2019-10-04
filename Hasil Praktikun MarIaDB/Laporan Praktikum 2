@@ -1,0 +1,496 @@
+Enter password: ***********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.3.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> select
+    -> 10-6+5*0+3:2
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':2' at line 2
+MariaDB [(none)]> 10-6+5*0+3/2
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '10-6+5*0+3/2' at line 1
+MariaDB [(none)]> select
+    -> 10-6+5*0+3/2;
++--------------+
+| 10-6+5*0+3/2 |
++--------------+
+|       5.5000 |
++--------------+
+1 row in set (0.002 sec)
+
+MariaDB [(none)]> select
+    -> 5%2;
++------+
+| 5%2  |
++------+
+|    1 |
++------+
+1 row in set (0.000 sec)
+
+MariaDB [(none)]> create table identitas_mhs(Id_mhs Integer Not_Null, namaDepan_mhs Varchar(20), namaBelakang_mhs Varchar(20), tgl lahir_mhs Date, status_mhs Boolean, Alamat_mhs Text;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> select
+    -> create table identitas_mhs(Id_mhs Integer Not_Null, namaDepan_mhs Varchar(20), namaBelakang_mhs Varchar(20), tgl lahir_mhs Date, status_mhs Boolean, Alamat_mhs Text;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'create table identitas_mhs(Id_mhs Integer Not_Null, namaDepan_mhs Varchar(20), n' at line 2
+MariaDB [(none)]> create table identitas_mhs(Id_mhs int Not_Null, namaDepan_mhs Varchar(20), namaBelakang_mhs Varchar(20), tgl lahir_mhs Date, status_mhs Boolean, Alamat_mhs Text;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> select
+    -> create table identitas_mhs(Id_mhs int Not Null, namaDepan_mhs Varchar(20), namaBelakang_mhs Varchar(20), tgl lahir_mhs Date, status_mhs Boolean, Alamat_mhs Text;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'create table identitas_mhs(Id_mhs int Not Null, namaDepan_mhs Varchar(20), namaB' at line 2
+MariaDB [(none)]> create table identitas_mhs(Id_mhs int not_null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl lahir_mhs date, status_mhs boolean, Alamat_mhs text;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> select
+    ->  create table identitas_mhs(Id_mhs int not_null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl lahir_mhs date, status_mhs boolean, Alamat_mhs text;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'create table identitas_mhs(Id_mhs int not_null, namaDepan_mhs varchar(20), namaB' at line 2
+MariaDB [(none)]>  create table identitas_mhs (Id_mhs int not_null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl lahir_mhs date, status_mhs boolean, Alamat_mhs text;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> select
+    ->  create table identitas_mhs (Id_mhs int not_null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl lahir_mhs date, status_mhs boolean, Alamat_mhs text;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'create table identitas_mhs (Id_mhs int not_null, namaDepan_mhs varchar(20), nama' at line 2
+MariaDB [(none)]> create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text);
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> select
+    ->  create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), nama' at line 2
+MariaDB [(none)]> create table identintas_mhs (Id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text);
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text);
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> select
+    -> create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), nama' at line 2
+MariaDB [(none)]> select
+    -> create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), nama' at line 2
+MariaDB [(none)]> create database praktikum2;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| agil18650070            |
+| annisa_18650048         |
+| aziz_maulana_18650010   |
+| cob1                    |
+| cobadb                  |
+| db1                     |
+| db2                     |
+| dbcoba                  |
+| haffad18650105          |
+| ilham18650006           |
+| information_schema      |
+| kamispagi1              |
+| kamispagi17             |
+| kamispraktikumdatabasei |
+| mysql                   |
+| performance_schema      |
+| pertemuan1              |
+| pertemuan1selasa810     |
+| pertemuan2              |
+| pertemuan_1             |
+| praktikum2              |
+| praktikum_2             |
+| qonita18650100          |
+| qonita_18650100         |
+| rabu                    |
+| rabu11                  |
+| rizkiutama16650038      |
+| satriabudi18650056      |
+| selasa                  |
+| selasa810               |
+| selasabasisdata         |
+| selasakelasc            |
+| seninbasisdataa         |
+| seninpraktikumbasisdata |
+| test                    |
+| testt                   |
++-------------------------+
+36 rows in set (0.007 sec)
+
+MariaDB [(none)]> use praktikum2;
+Database changed
+MariaDB [praktikum2]> create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text);
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [praktikum2]> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| agil18650070            |
+| annisa_18650048         |
+| aziz_maulana_18650010   |
+| cob1                    |
+| cobadb                  |
+| db1                     |
+| db2                     |
+| dbcoba                  |
+| haffad18650105          |
+| ilham18650006           |
+| information_schema      |
+| kamispagi1              |
+| kamispagi17             |
+| kamispraktikumdatabasei |
+| mysql                   |
+| performance_schema      |
+| pertemuan1              |
+| pertemuan1selasa810     |
+| pertemuan2              |
+| pertemuan_1             |
+| praktikum2              |
+| praktikum_2             |
+| qonita18650100          |
+| qonita_18650100         |
+| rabu                    |
+| rabu11                  |
+| rizkiutama16650038      |
+| satriabudi18650056      |
+| selasa                  |
+| selasa810               |
+| selasabasisdata         |
+| selasakelasc            |
+| seninbasisdataa         |
+| seninpraktikumbasisdata |
+| test                    |
+| testt                   |
++-------------------------+
+36 rows in set (0.001 sec)
+
+MariaDB [praktikum2]> create table identitas_mhs (id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text);
+ERROR 1050 (42S01): Table 'identitas_mhs' already exists
+MariaDB [praktikum2]> desc identitas_mhs;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| id_mhs           | int(11)     | NO   |     | NULL    |       |
+| namaDepan_mhs    | varchar(20) | YES  |     | NULL    |       |
+| namaBelakang_mhs | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs    | date        | YES  |     | NULL    |       |
+| status_mhs       | tinyint(1)  | YES  |     | NULL    |       |
+| alamat_mhs       | text        | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.004 sec)
+
+MariaDB [praktikum2]> create table tabel_nim (id_mhs int not null, namaDepan_mhs varchar(20), namaBelakang_mhs varchar(20), tgl_lahir_mhs date, status_mhs boolean, alamat_mhs text);
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [praktikum2]> desc tabel_nim;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| id_mhs           | int(11)     | NO   |     | NULL    |       |
+| namaDepan_mhs    | varchar(20) | YES  |     | NULL    |       |
+| namaBelakang_mhs | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs    | date        | YES  |     | NULL    |       |
+| status_mhs       | tinyint(1)  | YES  |     | NULL    |       |
+| alamat_mhs       | text        | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.002 sec)
+
+MariaDB [praktikum2]> alter table identitas_mhs drop column status_mhs;
+Query OK, 0 rows affected (0.040 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [praktikum2]> desc identitas_mhs;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| id_mhs           | int(11)     | NO   |     | NULL    |       |
+| namaDepan_mhs    | varchar(20) | YES  |     | NULL    |       |
+| namaBelakang_mhs | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs    | date        | YES  |     | NULL    |       |
+| alamat_mhs       | text        | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.003 sec)
+
+MariaDB [praktikum2]> alter table identitas_mhs add column namaOrtu varchar;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [praktikum2]> alter table identitas_mhs add namaOrtu varchar(20);
+Query OK, 0 rows affected (0.006 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [praktikum2]> desc identitas_mhs;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| id_mhs           | int(11)     | NO   |     | NULL    |       |
+| namaDepan_mhs    | varchar(20) | YES  |     | NULL    |       |
+| namaBelakang_mhs | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs    | date        | YES  |     | NULL    |       |
+| alamat_mhs       | text        | YES  |     | NULL    |       |
+| namaOrtu         | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.003 sec)
+
+MariaDB [praktikum2]> alter table identitas_mhs to rename to pekerjaNIM;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'to rename to pekerjaNIM' at line 1
+MariaDB [praktikum2]> alter table pekerjaNIM change namaBelakang_mhs LastName varchar(20);
+ERROR 1146 (42S02): Table 'praktikum2.pekerjanim' doesn't exist
+MariaDB [praktikum2]> alter table identitas_mh rename to pekerjaNIM;
+ERROR 1146 (42S02): Table 'praktikum2.identitas_mh' doesn't exist
+MariaDB [praktikum2]> alter tablle identitas_mhs rename to pekerjaNIM;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tablle identitas_mhs rename to pekerjaNIM' at line 1
+MariaDB [praktikum2]> alter table identitas_mhs rename to pekerjaNIM;
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [praktikum2]> desc pekerjaNIM;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| id_mhs           | int(11)     | NO   |     | NULL    |       |
+| namaDepan_mhs    | varchar(20) | YES  |     | NULL    |       |
+| namaBelakang_mhs | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs    | date        | YES  |     | NULL    |       |
+| alamat_mhs       | text        | YES  |     | NULL    |       |
+| namaOrtu         | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.004 sec)
+
+MariaDB [praktikum2]> alter table pekerjaNIM change namaBelakang_mhs LastName varchar(20);
+Query OK, 0 rows affected (0.006 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [praktikum2]> desc pekerjaNIM;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id_mhs        | int(11)     | NO   |     | NULL    |       |
+| namaDepan_mhs | varchar(20) | YES  |     | NULL    |       |
+| LastName      | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs | date        | YES  |     | NULL    |       |
+| alamat_mhs    | text        | YES  |     | NULL    |       |
+| namaOrtu      | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.003 sec)
+
+MariaDB [praktikum2]> alter table pekerjaNIM add primary key alamat_mhs;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [praktikum2]> alter table pekerjaNIM add primary key (alamat_mhs);
+ERROR 1170 (42000): BLOB/TEXT column 'alamat_mhs' used in key specification without a key length
+MariaDB [praktikum2]> desc pekerjaNIM;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id_mhs        | int(11)     | NO   |     | NULL    |       |
+| namaDepan_mhs | varchar(20) | YES  |     | NULL    |       |
+| LastName      | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs | date        | YES  |     | NULL    |       |
+| alamat_mhs    | text        | YES  |     | NULL    |       |
+| namaOrtu      | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.003 sec)
+
+MariaDB [praktikum2]> alter table pekerjaNIM add primary text (alamat_mhs);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'text (alamat_mhs)' at line 1
+MariaDB [praktikum2]>
+MariaDB [praktikum2]>
+MariaDB [praktikum2]>
+MariaDB [praktikum2]>
+MariaDB [praktikum2]> alter able pekerjaNIM add primary key (alamat_mhs);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'able pekerjaNIM add primary key (alamat_mhs)' at line 1
+MariaDB [praktikum2]> alter table pekerjaNIM add primary key (alamat_mhs);
+ERROR 1170 (42000): BLOB/TEXT column 'alamat_mhs' used in key specification without a key length
+MariaDB [praktikum2]>  alter table pekerjaNIM add primary key (id_mhs);
+Query OK, 0 rows affected (0.041 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [praktikum2]> desc pekerjaNIM;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id_mhs        | int(11)     | NO   | PRI | NULL    |       |
+| namaDepan_mhs | varchar(20) | YES  |     | NULL    |       |
+| LastName      | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs | date        | YES  |     | NULL    |       |
+| alamat_mhs    | text        | YES  |     | NULL    |       |
+| namaOrtu      | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.003 sec)
+
+MariaDB [praktikum2]> create temporary table mahasiswa (id_mahasiswa int not null, tgl_lhr_mhs varchar(20), nama_mhs text);
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> desc mahasiswa;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id_mahasiswa | int(11)     | NO   |     | NULL    |       |
+| tgl_lhr_mhs  | varchar(20) | YES  |     | NULL    |       |
+| nama_mhs     | text        | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.003 sec)
+
+MariaDB [praktikum2]> grant all on mahasiwa to akses;
+ERROR 1133 (28000): Can't find any matching row in the user table
+MariaDB [praktikum2]> grant all on pekerjaNIM to hello;
+ERROR 1133 (28000): Can't find any matching row in the user table
+MariaDB [praktikum2]> grant all on pekerjaNIM to biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> desc pekerjaNIM;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id_mhs        | int(11)     | NO   | PRI | NULL    |       |
+| namaDepan_mhs | varchar(20) | YES  |     | NULL    |       |
+| LastName      | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs | date        | YES  |     | NULL    |       |
+| alamat_mhs    | text        | YES  |     | NULL    |       |
+| namaOrtu      | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.004 sec)
+
+MariaDB [praktikum2]> revoke all on pekerjaNIM from biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> revoke update on pekerjaNIM from biru;
+ERROR 1147 (42000): There is no such grant defined for user 'biru' on host '%' on table 'pekerjanim'
+MariaDB [praktikum2]> show grant for biru;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'grant for biru' at line 1
+MariaDB [praktikum2]> grant all on pekerjaNIM to user;
+ERROR 1133 (28000): Can't find any matching row in the user table
+MariaDB [praktikum2]> grant all on pekerjaNIM to hijau;
+ERROR 1133 (28000): Can't find any matching row in the user table
+MariaDB [praktikum2]> desc pekerjaNIM;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id_mhs        | int(11)     | NO   | PRI | NULL    |       |
+| namaDepan_mhs | varchar(20) | YES  |     | NULL    |       |
+| LastName      | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs | date        | YES  |     | NULL    |       |
+| alamat_mhs    | text        | YES  |     | NULL    |       |
+| namaOrtu      | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.003 sec)
+
+MariaDB [praktikum2]> grant all on pekerjaNIM to biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> show grant for biru;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'grant for biru' at line 1
+MariaDB [praktikum2]> show grants for biru
+    -> ;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for biru@%                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'biru'@'%' IDENTIFIED BY PASSWORD '*00A51F3F48415C7D4E8908980D443C29C69B60C9'                                                               |
+| GRANT ALL PRIVILEGES ON `praktikum_2`.`pekerjanm` TO 'biru'@'%'                                                                                                   |
+| GRANT ALL PRIVILEGES ON `praktikum2`.`pekerjanim` TO 'biru'@'%'                                                                                                   |
+| GRANT INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER, DELETE HISTORY ON `praktikum_2`.`pekerjanim` TO 'biru'@'%' |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [praktikum2]> revoke all on pekerjaNIM from biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> show revokes for biru;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'revokes for biru' at line 1
+MariaDB [praktikum2]> show revoke for biri;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'revoke for biri' at line 1
+MariaDB [praktikum2]> show grants for biru;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for biru@%                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'biru'@'%' IDENTIFIED BY PASSWORD '*00A51F3F48415C7D4E8908980D443C29C69B60C9'                                                               |
+| GRANT ALL PRIVILEGES ON `praktikum_2`.`pekerjanm` TO 'biru'@'%'                                                                                                   |
+| GRANT INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER, DELETE HISTORY ON `praktikum_2`.`pekerjanim` TO 'biru'@'%' |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [praktikum2]> grant all on pekerjaNIM to biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> show grants for biru;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for biru@%                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'biru'@'%' IDENTIFIED BY PASSWORD '*00A51F3F48415C7D4E8908980D443C29C69B60C9'                                                               |
+| GRANT ALL PRIVILEGES ON `praktikum_2`.`pekerjanm` TO 'biru'@'%'                                                                                                   |
+| GRANT ALL PRIVILEGES ON `praktikum2`.`pekerjanim` TO 'biru'@'%'                                                                                                   |
+| GRANT INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER, DELETE HISTORY ON `praktikum_2`.`pekerjanim` TO 'biru'@'%' |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [praktikum2]> revoke all on pekerjaNIM from biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> show grants for biru;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for biru@%                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'biru'@'%' IDENTIFIED BY PASSWORD '*00A51F3F48415C7D4E8908980D443C29C69B60C9'                                                               |
+| GRANT ALL PRIVILEGES ON `praktikum_2`.`pekerjanm` TO 'biru'@'%'                                                                                                   |
+| GRANT INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER, DELETE HISTORY ON `praktikum_2`.`pekerjanim` TO 'biru'@'%' |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [praktikum2]> revoke select pekerjaNIM from biru;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'pekerjaNIM from biru' at line 1
+MariaDB [praktikum2]> revoke select on pekerjaNIM from biru;
+ERROR 1147 (42000): There is no such grant defined for user 'biru' on host '%' on table 'pekerjanim'
+MariaDB [praktikum2]> desc pekerjaNIM;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id_mhs        | int(11)     | NO   | PRI | NULL    |       |
+| namaDepan_mhs | varchar(20) | YES  |     | NULL    |       |
+| LastName      | varchar(20) | YES  |     | NULL    |       |
+| tgl_lahir_mhs | date        | YES  |     | NULL    |       |
+| alamat_mhs    | text        | YES  |     | NULL    |       |
+| namaOrtu      | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.003 sec)
+
+MariaDB [praktikum2]> grant all on pekerjaNIM to biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> show grants for biru;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for biru@%                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'biru'@'%' IDENTIFIED BY PASSWORD '*00A51F3F48415C7D4E8908980D443C29C69B60C9'                                                               |
+| GRANT ALL PRIVILEGES ON `praktikum_2`.`pekerjanm` TO 'biru'@'%'                                                                                                   |
+| GRANT ALL PRIVILEGES ON `praktikum2`.`pekerjanim` TO 'biru'@'%'                                                                                                   |
+| GRANT INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER, DELETE HISTORY ON `praktikum_2`.`pekerjanim` TO 'biru'@'%' |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [praktikum2]> revoke all on pekerjaNIM from biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> show grants for biru;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for biru@%                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'biru'@'%' IDENTIFIED BY PASSWORD '*00A51F3F48415C7D4E8908980D443C29C69B60C9'                                                               |
+| GRANT ALL PRIVILEGES ON `praktikum_2`.`pekerjanm` TO 'biru'@'%'                                                                                                   |
+| GRANT INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER, DELETE HISTORY ON `praktikum_2`.`pekerjanim` TO 'biru'@'%' |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [praktikum2]> grant all on pekerjaNIM to biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> revoke select on pekerjaNIM from biru;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [praktikum2]> show grants for biru;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for biru@%                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'biru'@'%' IDENTIFIED BY PASSWORD '*00A51F3F48415C7D4E8908980D443C29C69B60C9'                                                               |
+| GRANT ALL PRIVILEGES ON `praktikum_2`.`pekerjanm` TO 'biru'@'%'                                                                                                   |
+| GRANT INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER, DELETE HISTORY ON `praktikum2`.`pekerjanim` TO 'biru'@'%'  |
+| GRANT INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER, DELETE HISTORY ON `praktikum_2`.`pekerjanim` TO 'biru'@'%' |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [praktikum2]>
