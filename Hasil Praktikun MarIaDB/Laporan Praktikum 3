@@ -1,0 +1,153 @@
+SatriaBudi 18650056
+
+1. MariaDB [satriakamis]> create table Mahasiswa (nim int not null, nama_mhs varchar(20), alamat_mhs varchar(20), id_fak int not null, primary key(nim));
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [satriakamis]> desc Mahasiswa;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| nim        | int(11)     | NO   | PRI | NULL    |       |
+| nama_mhs   | varchar(20) | YES  |     | NULL    |       |
+| alamat_mhs | varchar(20) | YES  |     | NULL    |       |
+| id_fak     | int(11)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.006 sec)
+MariaDB [satriakamis]> create table fakultas(id_fak int not null,  nama_fak varchar(20), primary key(id_fak));
+Query OK, 0 rows affected (0.010 sec)
+MariaDB [satriakamis]>  ALTER TABLE Mahasiswa ADD CONSTRAINT Fakultas FOREIGN KEY (id_fak) REFERENCES Fakultas (id_fak) ON UPDATE NO ACTION ON DELETE NO ACTION;
+Query OK, 0 rows affected (0.064 sec)
+2. 
+MariaDB [satriakamis]> alter table Mahasiswa add no_telp varchar(20);
+Query OK, 0 rows affected (0.007 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [satriakamis]> desc Mahasiswa
+    -> ;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| nim        | int(11)     | NO   | PRI | NULL    |       |
+| nama_mhs   | varchar(20) | YES  |     | NULL    |       |
+| alamat_mhs | varchar(20) | YES  |     | NULL    |       |
+| id_fak     | int(11)     | NO   | MUL | NULL    |       |
+| no_telp    | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.003 sec)
+MariaDB [satriakamis]> insert into Fakultas values (1, 'SAINTEK');
+Query OK, 1 row affected (0.004 sec)
+MariaDB [satriakamis]> insert into Fakultas values (2, 'PSIKOLOGI');
+Query OK, 1 row affected (0.004 sec)
+MariaDB [satriakamis]>  insert into Mahasiswa values (12, 'edi', 'malang', 1, '0856453428');
+Query OK, 1 row affected (0.004 sec)
+MariaDB [satriakamis]>  insert into Mahasiswa values (13, 'sinta', 'jogja', 1, '0813347565675');
+Query OK, 1 row affected (0.004 sec)
+MariaDB [satriakamis]> insert into Mahasiswa values (14, 'luki', 'ponorogo', 1, '082576568798');
+Query OK, 1 row affected (0.004 sec)
+
+3.
+MariaDB [satriakamis]> select nim, alamat_mhs from Mahasiswa;
++-----+------------+
+| nim | alamat_mhs |
++-----+------------+
+|  12 | malang     |
+|  13 | jogja      |
+|  14 | ponorogo   |
++-----+------------+
+3 rows in set (0.000 sec)
+4.
+MariaDB [satriakamis]> select*from Mahasiswa where nim = 12;
++-----+----------+------------+--------+------------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp    |
++-----+----------+------------+--------+------------+
+|  12 | edi      | malang     |      1 | 0856453428 |
++-----+----------+------------+--------+------------+
+1 row in set (0.002 sec)
+
+5.
+
+MariaDB [satriakamis]> select nim, nama_mhs, nama_fak FROM mahasiswa, Fakultas WHERE Mahasiswa.id_fak = Fakultas.id_fak;
++-----+----------+----------+
+| nim | nama_mhs | nama_fak |
++-----+----------+----------+
+|  12 | edi      | SAINTEK  |
+|  13 | sinta    | SAINTEK  |
+|  14 | luki     | SAINTEK  |
++-----+----------+----------+
+3 rows in set (0.002 sec)
+
+6.
+MariaDB [satriakamis]> delete from Mahasiswa where nim = 13;
+Query OK, 1 row affected (0.003 sec)
+MariaDB [satriakamis]> select*from Mahasiswa;
++-----+----------+------------+--------+--------------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp      |
++-----+----------+------------+--------+--------------+
+|  12 | edi      | malang     |      1 | 0856453428   |
+|  14 | luki     | ponorogo   |      1 | 082576568798 |
++-----+----------+------------+--------+--------------+
+2 rows in set (0.000 sec)
+7. 
+MariaDB [satriakamis]> update Mahasiswa set alamat_mhs ='solo' where nim=12;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+MariaDB [satriakamis]> select*from Mahasiswa;
++-----+----------+------------+--------+--------------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp      |
++-----+----------+------------+--------+--------------+
+|  12 | edi      | solo       |      1 | 0857688788   |
+|  14 | luki     | ponorogo   |      1 | 082576568798 |
++-----+----------+------------+--------+--------------+
+2 rows in set (0.000 sec)
+8.
+
+MariaDB [satriakamis]> select*from Mahasiswa order by nim desc;
++-----+----------+------------+--------+--------------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp      |
++-----+----------+------------+--------+--------------+
+|  14 | luki     | ponorogo   |      1 | 082576568798 |
+|  12 | edi      | solo       |      1 | 0857688788   |
++-----+----------+------------+--------+--------------+
+2 rows in set (0.000 sec)
+
+MariaDB [satriakamis]> select*from Mahasiswa order by nim desc, id_fak asc;
++-----+----------+------------+--------+--------------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp      |
++-----+----------+------------+--------+--------------+
+|  14 | luki     | ponorogo   |      1 | 082576568798 |
+|  12 | edi      | solo       |      1 | 0857688788   |
++-----+----------+------------+--------+--------------+
+2 rows in set (0.000 sec)
+
+9. 
+MariaDB [satriakamis]> select * from Mahasiswa, Fakultas where mahasiswa.id_fak = fakultas.id_fak;
++-----+----------+------------+--------+--------------+--------+-----------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp      | id_fak | nama_fak  |
++-----+----------+------------+--------+--------------+--------+-----------+
+|  12 | edi      | solo       |      1 | 0857688788   |      1 | SAINTEK   |
+|  14 | luki     | ponorogo   |      2 | 082576568798 |      2 | PSIKOLOGI |
++-----+----------+------------+--------+--------------+--------+-----------+
+2 rows in set (0.000 sec)
+
+10.
+MariaDB [satriakamis]> select *from Mahasiswa, Fakultas where mahasiswa.id_fak = fakultas.id_fak and nama_fak = 'SAINTEK';
++-----+----------+------------+--------+------------+--------+----------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp    | id_fak | nama_fak |
++-----+----------+------------+--------+------------+--------+----------+
+|  12 | edi      | solo       |      1 | 0857688788 |      1 | SAINTEK  |
++-----+----------+------------+--------+------------+--------+----------+
+1 row in set (0.001 sec)
+
+11. 
+MariaDB [satriakamis]> select * from Mahasiswa, Fakultas where mahasiswa.id_fak = fakultas.id_fak AND Nama_fak != 'SAINTEK';
++-----+----------+------------+--------+--------------+--------+-----------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp      | id_fak | nama_fak  |
++-----+----------+------------+--------+--------------+--------+-----------+
+|  14 | luki     | ponorogo   |      2 | 082576568798 |      2 | PSIKOLOGI |
++-----+----------+------------+--------+--------------+--------+-----------+
+1 row in set (0.000 sec)
+
+
+
+
+
