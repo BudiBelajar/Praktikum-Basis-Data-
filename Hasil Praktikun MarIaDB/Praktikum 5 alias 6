@@ -1,0 +1,295 @@
+MariaDB [budi]> select * from Mahasiswa1;
++-----+----------+-------------+--------+------------+--------+
+| nim | nama_mhs | alamat_mhs  | id_fak | no_telp    | gender |
++-----+----------+-------------+--------+------------+--------+
+|   1 | edi      | solo        |      1 | 08878      | L      |
+|   2 | ediah    | jogja       |      2 | 08879      | P      |
+|   3 | edo      | nganjuk     |      1 | 08880      | L      |
+|   4 | edoati   | jkt         |      1 | 08881      | P      |
+|   5 | ita      | sby         |      2 | 08882      | P      |
+|   6 | ati      | riau        |      1 | 08883      | P      |
+|   7 | rio      | malang      |      2 | 08884      | L      |
+|   8 | santi    | semarang    |      2 | 08890      | P      |
+|   9 | luki     | surabaya    |      3 | 088868754  | L      |
+|  10 | AHMAD    | SEMARANG    |      3 | 088357754  | L      |
+|  11 | FARAH    | PROBOLINGGO |      5 | 0838653997 | P      |
+|  12 | SAHRUL   | MOJOKERTO   |      4 | 083353647  | L      |
++-----+----------+-------------+--------+------------+--------+
+12 rows in set (0.00 sec)
+
+MariaDB [budi]>  select nama_fak , count(*) from Mahasiswa1, fakultas1 where Mahasiswa1.id_fak = fakultas1.id_fak group by nama_fak order by count(*) asc limit 1;
++-------------+----------+
+| nama_fak    | count(*) |
++-------------+----------+
+| ILMU SOSIAL |        1 |
++-------------+----------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]> select nama_mhs, nama_fak, alamat_mhs from mahasiswa, fakultas where mahasiswa.id_fak = fakultas.id_fak and nama_fak in (select nama_fak from mahasiswa, fakultas where mahasiswa.id_fak = fakultas.id_fak and nama_mhs = 'edi') and alamat_mhs not in (select alamat_mhs from mahasiswa where alamat_mhs = 'solo');
++----------+----------+------------+
+| nama_mhs | nama_fak | alamat_mhs |
++----------+----------+------------+
+| edi      | SAINTEK  | malang     |
+| sinta    | SAINTEK  | jogja      |
++----------+----------+------------+
+2 rows in set (0.00 sec)
+
+MariaDB [budi]> select nama_mhs, nama_fak, alamat_mhs from Mahasiswa1, fakultas1 where Mahasiswa1.id_fak = fakultas1.id_fak and nama_fak in (select nama_fak from Mahasiswa1, fakultas1 where Mahasiswa1.id_fak = fakultas1.id_fak and nama_mhs = 'edi') and alamat_mhs not in (select alamat_mhs from Mahasiswa1 where alamat_mhs = 'solo');
++----------+----------+------------+
+| nama_mhs | nama_fak | alamat_mhs |
++----------+----------+------------+
+| edo      | SAINTEK  | nganjuk    |
+| edoati   | SAINTEK  | jkt        |
+| ati      | SAINTEK  | riau       |
++----------+----------+------------+
+3 rows in set (0.00 sec)
+
+MariaDB [budi]> select nama_mhs, nama_fak, alamat_mhs from Mahasiswa1, fakultas1 where Mahasiswa1.id_fak = fakultas1.id_fak and nama_fak in (select nama_fak from Mahasiswa1, fakultas1 where Mahasiswa1.id_fak = fakultas1.id_fak and nama_mhs = 'edi') and alamat_mhs not in (select alamat_mhs from Mahasiswa1 where alamat_mhs = 'surabaya');
++----------+----------+------------+
+| nama_mhs | nama_fak | alamat_mhs |
++----------+----------+------------+
+| edi      | SAINTEK  | solo       |
+| edo      | SAINTEK  | nganjuk    |
+| edoati   | SAINTEK  | jkt        |
+| ati      | SAINTEK  | riau       |
++----------+----------+------------+
+4 rows in set (0.00 sec)
+
+MariaDB [budi]> create index alamat on Mahasiswa1(alamat_mhs);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> show index from mahasiswa \g;
++-----------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table     | Non_unique | Key_name                | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++-----------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| mahasiswa |          0 | PRIMARY                 |            1 | nim         | A         |           3 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa |          0 | nomeridentitasmahasiswa |            1 | nim         | A         |           3 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa |          1 | Fakultas                |            1 | id_fak      | A         |           3 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa |          1 | alamat                  |            1 | alamat_mhs  | A         |           3 |     NULL | NULL   | YES  | BTREE      |         |               |
++-----------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+4 rows in set (0.00 sec)
+
+ERROR: No query specified
+
+MariaDB [budi]> show index from Mahasiswa1 \g;
++------------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table      | Non_unique | Key_name  | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++------------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| mahasiswa1 |          0 | PRIMARY   |            1 | nim         | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          1 | Fakultas1 |            1 | id_fak      | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          1 | alamat    |            1 | alamat_mhs  | A         |          12 |     NULL | NULL   | YES  | BTREE      |         |               |
++------------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+3 rows in set (0.00 sec)
+
+ERROR: No query specified
+
+MariaDB [budi]> create unique index nomeridentitasmahasiswa on Mahasiswa1(nim);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> show index from Mahasiswa1 \g;
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table      | Non_unique | Key_name                | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| mahasiswa1 |          0 | PRIMARY                 |            1 | nim         | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          0 | nomeridentitasmahasiswa |            1 | nim         | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          1 | Fakultas1               |            1 | id_fak      | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |  ;                                                                                                              | YES  | BTREE      |         |               |
+ERROR: No query specified-+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+4 rows in set (0.00 sec)
+MariaDB [budi]>
+ERROR: No query specified
+
+MariaDB [budi]> create unique index nama_mhsindeks on Mahasiswa1 (nama_mhs);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> show index from Mahasiswa1 \g;
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table      | Non_unique | Key_name                | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| mahasiswa1 |          0 | PRIMARY                 |            1 | nim         | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          0 | nomeridentitasmahasiswa |            1 | nim         | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          0 | nama_mhsindeks          |            1 | nama_mhs    | A         |          12 |     NULL | NULL   | YES  | BTREE      |         |               |
+| mahasiswa1 |          1 | Fakultas1               |            1 | id_fak      | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          1 | alamat                  |            1 | alamat_mhs  | A         |          12 |     NULL | NULL   | YES  | BTREE      |         |               |
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+5 rows in set (0.00 sec)
+
+ERROR: No query specified
+
+MariaDB [budi]> create unique index nama_mhsindeks2 on Mahasiswa1 (nama_mhs);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [budi]> show index from Mahasiswa1 \g;
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table      | Non_unique | Key_name                | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| mahasiswa1 |          0 | PRIMARY                 |            1 | nim         | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          0 | nomeridentitasmahasiswa |            1 | nim         | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          0 | nama_mhsindeks          |            1 | nama_mhs    | A         |          12 |     NULL | NULL   | YES  | BTREE      |         |               |
+| mahasiswa1 |          0 | nama_mhsindeks2         |            1 | nama_mhs    | A         |          12 |     NULL | NULL   | YES  | BTREE      |         |               |
+| mahasiswa1 |          1 | Fakultas1               |            1 | id_fak      | A         |          12 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          1 | alamat                  |            1 | alamat_mhs  | A         |          12 |     NULL | NULL   | YES  | BTREE      |         |               |
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+6 rows in set (0.00 sec)
+
+ERROR: No query specified
+
+MariaDB [budi]> create table identitas_mhs select nim, nama_mhs, alamat_mhs, nama_fak from mahasiswa, fakultas where mahasiswa.id_fak = fakultas.id_fak;
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> create table identitas_mhs select nim, nama_mhs, alamat_mhs, nama_fak from Mahasiswa1, fakultas1 whereFRGRR
+
+
+MariaDB [(none)]> use budi;
+Database changed
+MariaDB [budi]> create table identitasmahasiswa select nim, nama_mhs, alamat_mhs, nama_fak from Mahasiswa1, fakultas1 where Mahasiswa1.id_fak = fakultas1.id_fak;
+Query OK, 12 rows affected (0.02 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> select * from identitasmahasiswa;
++-----+----------+-------------+-------------+
+| nim | nama_mhs | alamat_mhs  | nama_fak    |
++-----+----------+-------------+-------------+
+|   1 | edi      | solo        | SAINTEK     |
+|   2 | ediah    | jogja       | PSIKOLOGI   |
+|   3 | edo      | nganjuk     | SAINTEK     |
+|   4 | edoati   | jkt         | SAINTEK     |
+|   5 | ita      | sby         | PSIKOLOGI   |
+|   6 | ati      | riau        | SAINTEK     |
+|   7 | rio      | malang      | PSIKOLOGI   |
+|   8 | santi    | semarang    | PSIKOLOGI   |
+|   9 | luki     | surabaya    | tafsir      |
+|  10 | AHMAD    | SEMARANG    | tafsir      |
+|  11 | FARAH    | PROBOLINGGO | ILMU SOSIAL |
+|  12 | SAHRUL   | MOJOKERTO   | PGSD        |
++-----+----------+-------------+-------------+
+12 rows in set (0.00 sec)
+
+MariaDB [budi]> insert into Mahasiswa1 values (13, 'leman+++', 'borneo', 5, '08375758587', 'L');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> insert into Mahasiswa1 values (14, '+++Sholeh', 'tasik', 4, '0837577587', 'L');
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [budi]> select * from Mahasiswa1;
++-----+-----------+-------------+--------+-------------+--------+
+| nim | nama_mhs  | alamat_mhs  | id_fak | no_telp     | gender |
++-----+-----------+-------------+--------+-------------+--------+
+|   1 | edi       | solo        |      1 | 08878       | L      |
+|   2 | ediah     | jogja       |      2 | 08879       | P      |
+|   3 | edo       | nganjuk     |      1 | 08880       | L      |
+|   4 | edoati    | jkt         |      1 | 08881       | P      |
+|   5 | ita       | sby         |      2 | 08882       | P      |
+|   6 | ati       | riau        |      1 | 08883       | P      |
+|   7 | rio       | malang      |      2 | 08884       | L      |
+|   8 | santi     | semarang    |      2 | 08890       | P      |
+|   9 | luki      | surabaya    |      3 | 088868754   | L      |
+|  10 | AHMAD     | SEMARANG    |      3 | 088357754   | L      |
+|  11 | FARAH     | PROBOLINGGO |      5 | 0838653997  | P      |
+|  12 | SAHRUL    | MOJOKERTO   |      4 | 083353647   | L      |
+|  13 | leman+++  | borneo      |      5 | 08375758587 | L      |
+|  14 | +++Sholeh | tasik       |      4 | 0837577587  | L      |
++-----+-----------+-------------+--------+-------------+--------+
+14 rows in set (0.00 sec)
+
+MariaDB [budi]> select trim(TRAILING '+' from 'leman+++');
++------------------------------------+
+| trim(TRAILING '+' from 'leman+++') |
++------------------------------------+
+| leman                              |
++------------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]> insert into Mahasiswa1 values (14, 'ATASAN', 'MALAYSIA', 3, '083796586947', 'L');
+ERROR 1062 (23000): Duplicate entry '14' for key 'PRIMARY'
+MariaDB [budi]> insert into Mahasiswa1 values (15, 'ATASAN', 'MALAYSIA', 3, '083796586947', 'L');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> select trim (LEADING 'A' from 'ATASAN');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'LEADING 'A' from 'ATASAN')' at line 1
+MariaDB [budi]> select trim (LEADING 'a' from 'ATASAN');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'LEADING 'a' from 'ATASAN')' at line 1
+MariaDB [budi]> insert into Mahasiswa1 values (15, 'artawira', 'aceh', 3, '0834586947', 'L');
+ERROR 1062 (23000): Duplicate entry '15' for key 'PRIMARY'
+MariaDB [budi]> insert into Mahasiswa1 values (16, 'artawira', 'aceh', 3, '0834586947', 'L');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [budi]> select trim(TRAILING 'a' from 'artawira');
++------------------------------------+
+| trim(TRAILING 'a' from 'artawira') |
++------------------------------------+
+| artawir                            |
++------------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]> select trim(LEADING 'a' from 'artawira');
++-----------------------------------+
+| trim(LEADING 'a' from 'artawira') |
++-----------------------------------+
+| rtawira                           |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]>
+
+MariaDB [budi]> create unique index namaFAK on fakultas1(id_fak);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> create unique index namaFAK on fakultas1(fak);
+ERROR 1072 (42000): Key column 'fak' doesn't exist in table
+MariaDB [budi]> select * from fakultas1;
++--------+-------------+
+| id_fak | nama_fak    |
++--------+-------------+
+|      1 | SAINTEK     |
+|      2 | PSIKOLOGI   |
+|      3 | tafsir      |
+|      4 | PGSD        |
+|      5 | ILMU SOSIAL |
++--------+-------------+
+5 rows in set (0.00 sec)
+
+MariaDB [budi]> create unique index namaFAK on fakultas1(nama_fak);
+ERROR 1061 (42000): Duplicate key name 'namaFAK'
+MariaDB [budi]> create unique index namaFAK on fakultas1 (id_fak);
+ERROR 1061 (42000): Duplicate key name 'namaFAK'
+MariaDB [budi]> create unique index namaFAK on fakultas1.id_fak;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [budi]> create unique index fak_index on fakultas1 (nama_fak);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> show index from Mahasiswa1 \g;
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table      | Non_unique | Key_name                | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| mahasiswa1 |          0 | PRIMARY                 |            1 | nim         | A         |          16 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          0 | nomeridentitasmahasiswa |            1 | nim         | A         |          16 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          0 | nama_mhsindeks          |            1 | nama_mhs    | A         |          16 |     NULL | NULL   | YES  | BTREE      |         |               |
+| mahasiswa1 |          0 | nama_mhsindeks2         |            1 | nama_mhs    | A         |          16 |     NULL | NULL   | YES  | BTREE      |         |               |
+| mahasiswa1 |          1 | Fakultas1               |            1 | id_fak      | A         |          16 |     NULL | NULL   |      | BTREE      |         |               |
+| mahasiswa1 |          1 | alamat                  |            1 | alamat_mhs  | A         |          16 |     NULL | NULL   | YES  | BTREE      |         |               |
++------------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+6 rows in set (0.00 sec)
+
+ERROR: No query specified
+
+MariaDB [budi]> show index from fakultas1 \g;
++-----------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table     | Non_unique | Key_name  | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++-----------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| fakultas1 |          0 | PRIMARY   |            1 | id_fak      | A         |           5 |     NULL | NULL   |      | BTREE      |         |               |
+| fakultas1 |          0 | namaFAK   |            1 | id_fak      | A         |           5 |     NULL | NULL   |      | BTREE      |         |               |
+| fakultas1 |          0 | fak_index |            1 | nama_fak    | A         |           5 |     NULL | NULL   | YES  | BTREE      |         |               |
++-----------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+3 rows in set (0.00 sec)
+
+ERROR: No query specified
+
+MariaDB [budi]>
