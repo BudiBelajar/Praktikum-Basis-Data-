@@ -1,0 +1,112 @@
+Enter password: ***********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.2.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use budi;
+Database changed
+MariaDB [budi]> create or replace function konversiSuhu( f Float)
+    -> returns float
+    -> return ((f - 32)*5/9);
+Query OK, 0 rows affected (0.02 sec)
+
+MariaDB [budi]> select konversiSuhu(10);
++---------------------+
+| konversiSuhu(10)    |
++---------------------+
+| -12.222222328186035 |
++---------------------+
+1 row in set (0.01 sec)
+
+MariaDB [budi]> select konverSuhu(100);
+ERROR 1305 (42000): FUNCTION budi.konverSuhu does not exist
+MariaDB [budi]> create function cariAlamat_mhs(namaMhs varchar(20))
+    -> returns varchar(20)
+    -> begin
+    -> declare alamat varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 4
+MariaDB [budi]> create function cariAlamat_mhs(namaMhs varchar(20))
+    -> returns varchar(20)
+    -> begin
+    -> declare alamat Varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 4
+MariaDB [budi]> delimiter //
+MariaDB [budi]> create function cariAlamat_mhs(namaMhs Varchar(20))
+    -> RETURNS Varchar(20)
+    -> BEGIN
+    -> DECLARE alamat Varchar(20);
+    -> select alamat_mhs into alamat from Mahasiswa1 where nama_mhs = namaMhs;
+    -> return alamat;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+MariaDB [budi]> select * from Mahasiswa1;
+   
+MariaDB [budi]> select cariAlamat_mhs('SAHRUL');
++--------------------------+
+| cariAlamat_mhs('SAHRUL') |
++--------------------------+
+| MOJOKERTO                |
++--------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]> delimiter //
+MariaDB [budi]> create function ganjilgenap (a int)
+    -> returns varchar(20)
+    -> begin
+    -> declare hasil varchar(20);
+    -> if a%2 = 0 then
+    -> set hasil = "genap";
+    -> else
+    -> set hasil = "ganjil";
+    -> end if;
+    -> return hasil;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+MariaDB [budi]> select ganjilgenap(17)//
++-----------------+
+| ganjilgenap(17) |
++-----------------+
+| ganjil          |
++-----------------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]> select ganjilgenap(56)//
++-----------------+
+| ganjilgenap(56) |
++-----------------+
+| genap           |
++-----------------+
+1 row in set (0.00 sec)
+
+ alter table Mahasiswa add column modifikasi date//
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [budi]> select * from Mahasiswa;
+    -> //
++-----+----------+------------+--------+---------------+---------+------------+
+| nim | nama_mhs | alamat_mhs | id_fak | no_telp       | kelamin | modifikasi |
++-----+----------+------------+--------+---------------+---------+------------+
+|  12 | edi      | malang     |      1 | 0856453428    | NULL    | NULL       |
+|  13 | sinta    | jogja      |      1 | 0813347565675 | NULL    | NULL       |
+|  14 | luki     | ponorogo   |      2 | 082576568798  | NULL    | NULL       |
++-----+----------+------------+--------+---------------+---------+------------+
+3 rows in set (0.00 sec)
+
+MariaDB [budi]> create trigger modifikasi1
+    -> before insert
+    -> on Mahasiswa for each row
+    -> begin
+    -> set new.modifikasi = sysdate();
+    -> end;
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+
+
