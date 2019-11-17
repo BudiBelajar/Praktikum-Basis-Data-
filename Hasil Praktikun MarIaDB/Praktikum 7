@@ -1,0 +1,129 @@
+===================1=====================
+
+MariaDB [budi]> select max(nim) from Mahasiswa1;
++----------+
+| max(nim) |
++----------+
+|       16 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]> select min(nim) from Mahasiswa1;
++----------+
+| min(nim) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [budi]> select avg(nim) from Mahasiswa1;
++----------+
+| avg(nim) |
++----------+
+|   8.5000 |
++----------+
+1 row in set (0.00 sec)
+
+===================2=========================
+
+MariaDB [budi]> select nama_mhs, avg(nim) from Mahasiswa1 group by nama_mhs having avg (nim) > 12;
++-----------+----------+
+| nama_mhs  | avg(nim) |
++-----------+----------+
+| +++Sholeh |  14.0000 |
+| artawira  |  16.0000 |
+| ATASAN    |  15.0000 |
+| leman+++  |  13.0000 |
++-----------+----------+
+4 rows in set (0.00 sec)
+
+==================3=======================
+
+MariaDB [budi]> select nama_fak, count(*) from Mahasiswa1, fakultas where Mahasiswa1.id_fak = fakultas.id_fak group by nama_fak desc;
++-----------+----------+
+| nama_fak  | count(*) |
++-----------+----------+
+| TAFSIR    |        4 |
+| SAINTEK   |        4 |
+| PSIKOLOGI |        4 |
+| PGSD      |        2 |
++-----------+----------+
+4 rows in set (0.00 sec)
+
+====================4====================
+
+MariaDB [budi]> select nim, nama_mhs, count(*) from Mahasiswa1 group by nim, nama_mhs >= 2;
++-----+-----------+----------+
+| nim | nama_mhs  | count(*) |
++-----+-----------+----------+
+|   1 | edi       |        1 |
+|   2 | ediah     |        1 |
+|   3 | edo       |        1 |
+|   4 | edoati    |        1 |
+|   5 | ita       |        1 |
+|   6 | ati       |        1 |
+|   7 | rio       |        1 |
+|   8 | santi     |        1 |
+|   9 | luki      |        1 |
+|  10 | AHMAD     |        1 |
+|  11 | FARAH     |        1 |
+|  12 | SAHRUL    |        1 |
+|  13 | leman+++  |        1 |
+|  14 | +++Sholeh |        1 |
+|  15 | ATASAN    |        1 |
+|  16 | artawira  |        1 |
++-----+-----------+----------+
+16 rows in set, 32 warnings (0.00 sec)
+
+=================5========================
+
+MariaDB [budi]> select nim, nama_mhs, alamat_mhs, id_fak, no_telp, case when gender = 'L' THEN 'Laki-laki' ELSE 'Perempuan' end as gender from Mahasiswa1;
++-----+-----------+-------------+--------+--------------+-----------+
+| nim | nama_mhs  | alamat_mhs  | id_fak | no_telp      | gender    |
++-----+-----------+-------------+--------+--------------+-----------+
+|   1 | edi       | solo        |      1 | 08878        | Laki-laki |
+|   2 | ediah     | jogja       |      2 | 08879        | Perempuan |
+|   3 | edo       | nganjuk     |      1 | 08880        | Laki-laki |
+|   4 | edoati    | jkt         |      1 | 08881        | Perempuan |
+|   5 | ita       | sby         |      2 | 08882        | Perempuan |
+|   6 | ati       | riau        |      1 | 08883        | Perempuan |
+|   7 | rio       | malang      |      2 | 08884        | Laki-laki |
+|   8 | santi     | semarang    |      2 | 08890        | Perempuan |
+|   9 | luki      | surabaya    |      3 | 088868754    | Laki-laki |
+|  10 | AHMAD     | SEMARANG    |      3 | 088357754    | Laki-laki |
+|  11 | FARAH     | PROBOLINGGO |      5 | 0838653997   | Perempuan |
+|  12 | SAHRUL    | MOJOKERTO   |      4 | 083353647    | Laki-laki |
+|  13 | leman+++  | borneo      |      5 | 08375758587  | Laki-laki |
+|  14 | +++Sholeh | tasik       |      4 | 0837577587   | Laki-laki |
+|  15 | ATASAN    | MALAYSIA    |      3 | 083796586947 | Laki-laki |
+|  16 | artawira  | aceh        |      3 | 0834586947   | Laki-laki |
++-----+-----------+-------------+--------+--------------+-----------+
+16 rows in set (0.00 sec)
+
+
+=====================6==========================
+
+MariaDB [budi]> create view data_mhs as select nim, nama_mhs, nama_fak from Mahasiswa1, fakultas where Mahasiswa1.id_fak = fakultas.id_fak;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [budi]> select * from data_mhs;
++-----+-----------+-----------+
+| nim | nama_mhs  | nama_fak  |
++-----+-----------+-----------+
+|   1 | edi       | SAINTEK   |
+|   3 | edo       | SAINTEK   |
+|   4 | edoati    | SAINTEK   |
+|   6 | ati       | SAINTEK   |
+|   2 | ediah     | PSIKOLOGI |
+|   5 | ita       | PSIKOLOGI |
+|   7 | rio       | PSIKOLOGI |
+|   8 | santi     | PSIKOLOGI |
+|   9 | luki      | TAFSIR    |
+|  10 | AHMAD     | TAFSIR    |
+|  15 | ATASAN    | TAFSIR    |
+|  16 | artawira  | TAFSIR    |
+|  12 | SAHRUL    | PGSD      |
+|  14 | +++Sholeh | PGSD      |
++-----+-----------+-----------+
+14 rows in set (0.00 sec)
+
